@@ -6,48 +6,87 @@ import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
-        List<Person> allNames = new ArrayList<>();
-        allNames.add(new Person("Olivia","Carpenter", 15));
-        allNames.add( new Person("Maddison","Stout", 18));
-        allNames.add(new Person("Rodrigo", "Roman",22));
-        allNames.add(new Person("Carly", "Owen", 30));
-        allNames.add(new Person("Robert", "Tyler",16 ));
-        allNames.add(new Person("Zaniyah", "Hull", 12));
-        allNames.add(new Person("Eleanor", "Wright", 47));
-        allNames.add(new Person("Dakota", "Rose", 10));
-        allNames.add(new Person("Shaun", "Harvey", 25));
-        allNames.add(new Person("Sanai", "May", 33));
+        List<Person> people = createPeopleList();
 
-        // Ask user for name to search(first or last)
-        System.out.println("Enter First OR Last Name to Search");
-        Scanner userScanner = new Scanner(System.in);
-        String userNameSearch = userScanner.nextLine();
+        System.out.print("Enter a name to search: ");
+        Scanner scanner = new Scanner(System.in);
+        String searchName = scanner.nextLine();
 
-        // For Loop and new List for Saved matches
-        List<Person> matchedName = new ArrayList<>();
-        for (Person p : allNames){
-            if (p.getFirstName().equalsIgnoreCase(userNameSearch) || p.getLastName().equalsIgnoreCase(userNameSearch)){
-                matchedName.add(p);
+        List<Person> matchingPeople = new ArrayList<>();
+        for (Person person : people) {
+            if (person.getFirstName().equalsIgnoreCase(searchName) ||
+                    person.getLastName().equalsIgnoreCase(searchName)) {
+                matchingPeople.add(person);
             }
         }
 
-        for (Person matchedNames : matchedName){
-            System.out.println(matchedNames);
+        System.out.println("People with matching name:");
+        for (Person person : matchingPeople) {
+            System.out.println(person.getFirstName() + " " + person.getLastName());
         }
-        //Loop through Matches and display
-       // for (Person person : matchedName){
-         //   System.out.println(person.);
 
-        // Calculate average age of All people and display it
-        // create variable to save results
-        double totalOfAges = 0;
-        //For Loop through List
-        for (Person ageTotal : allNames){
-            totalOfAges += ageTotal.getAge();
-        }
-        System.out.println("All Ages Total:" + totalOfAges / allNames.size());
+        //int averageAge = calculateAverageAge(people);
+        double averageAge = calculateAverageAge(people);
+        System.out.println("Average age: " + averageAge);
+
+        int oldestAge = findOldestAge(people);
+        System.out.println("Oldest person's age: " + oldestAge);
+
+        int youngestAge = findYoungestAge(people);
+        System.out.println("Youngest person's age: " + youngestAge);
     }
 
+    private static List<Person> createPeopleList() {
+        List<Person> people = new ArrayList<>();
+        // Add at least 10 people to the list
+        people.add(new Person("John", "Doe", 25));
+        people.add(new Person("Jane", "Smith", 30));
+        people.add(new Person("Michael", "Johnson", 35));
+        people.add(new Person("Emily", "Brown", 22));
+        people.add(new Person("David", "Miller", 40));
+        people.add(new Person("Sarah", "Davis", 28));
+        people.add(new Person("Daniel", "Anderson", 33));
+        people.add(new Person("Jessica", "Wilson", 27));
+        people.add(new Person("Matthew", "Martinez", 31));
+        people.add(new Person("Olivia", "Taylor", 29));
 
+        return people;
+    }
 
+/*    private static int calculateAverageAge(List<Person> people) {
+        int totalAge = 0;
+        for (Person person : people) {
+            totalAge += person.getAge();
+        }
+        return (int) Math.round((double) totalAge / people.size());
+    }*/
+
+    private static double calculateAverageAge(List<Person> people) {
+        double totalAge = 0;
+        for (Person person : people) {
+            totalAge += person.getAge();
+        }
+        return totalAge / people.size();
+    }
+
+    private static int findOldestAge(List<Person> people) {
+        int maxAge = Integer.MIN_VALUE;
+        for (Person person : people) {
+            if (person.getAge() > maxAge) {
+                maxAge = person.getAge();
+            }
+        }
+        return maxAge;
+    }
+
+    private static int findYoungestAge(List<Person> people) {
+        int minAge = Integer.MAX_VALUE;
+        for (Person person : people) {
+            if (person.getAge() < minAge) {
+                minAge = person.getAge();
+            }
+        }
+        return minAge;
+    }
 }
+
