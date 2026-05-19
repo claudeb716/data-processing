@@ -26,17 +26,18 @@ public class Program {
         // For Loop and new List for Saved matches
         List<Person> matchedName = new ArrayList<>();
         for (Person p : allNames){
-            if (p.getFirstName().equalsIgnoreCase(userNameSearch)){
+            if (p.getFirstName().equalsIgnoreCase(userNameSearch) || p.getLastName().equalsIgnoreCase(userNameSearch)){
                 matchedName.add(p);
             }
-            if (p.getLastName().equalsIgnoreCase(userNameSearch)){
-                matchedName.add(p);
-            }
+        }
+
+        for (Person matchedNames : matchedName){
+            System.out.println(matchedNames);
         }
         //Loop through Matches and display
-        for (Person person : matchedName){
-            System.out.println(person);
-        }
+       // for (Person person : matchedName){
+         //   System.out.println(person.);
+
         // Calculate average age of All people and display it
         // create variable to save results
         double totalOfAges = 0;
@@ -44,8 +45,9 @@ public class Program {
         for (Person ageTotal : allNames){
             totalOfAges += ageTotal.getAge();
         }
-        System.out.println("All Ages Total:" + totalOfAges);
+        System.out.println("All Ages Total:" + totalOfAges / allNames.size());
     }
+
 
 
 }
