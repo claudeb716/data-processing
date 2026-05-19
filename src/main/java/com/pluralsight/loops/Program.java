@@ -37,6 +37,14 @@ public class Program {
         for (Person person : matchedName){
             System.out.println(person);
         }
+        // Calculate average age of All people and display it
+        // create variable to save results
+        double totalOfAges = 0;
+        //For Loop through List
+        for (Person ageTotal : allNames){
+            totalOfAges += ageTotal.getAge();
+        }
+        System.out.println("All Ages Total:" + totalOfAges);
     }
 
 
